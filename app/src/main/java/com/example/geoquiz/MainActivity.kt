@@ -27,15 +27,25 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.trueButton.setOnClickListener { view: View ->
+        binding.trueButton.setOnClickListener { _: View ->
             checkAnswer(true)
         }
 
-        binding.falseButton.setOnClickListener { view: View ->
+        binding.falseButton.setOnClickListener { _: View ->
             checkAnswer(false)
         }
 
-        binding.nextButton.setOnClickListener { view: View ->
+        binding.nextButton.setOnClickListener { _: View ->
+            currentIndex = (currentIndex + 1) % questionBank.size
+            updateQuestion()
+        }
+
+        binding.previousButton.setOnClickListener { _: View ->
+            if (currentIndex != 0) currentIndex--
+            updateQuestion()
+        }
+
+        binding.questionTextView.setOnClickListener { _: View ->
             currentIndex = (currentIndex + 1) % questionBank.size
             updateQuestion()
         }
