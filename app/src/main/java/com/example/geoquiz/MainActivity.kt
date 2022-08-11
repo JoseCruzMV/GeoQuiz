@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.Toast
 import com.example.geoquiz.databinding.ActivityMainBinding
 
@@ -24,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     )
 
     private var currentIndex = 0
+    private var score = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,12 +65,15 @@ class MainActivity : AppCompatActivity() {
     private fun checkAnswer(userAnswer: Boolean) {
         val correctAnswer = questionBank[currentIndex].answer
         val messageId = if (userAnswer == correctAnswer) {
-            R.string.correct_toast
+            R.string.correct_toast.also { score++ }
         } else {
             R.string.incorrect_toast
         }
         Toast.makeText(this, messageId, Toast.LENGTH_SHORT).show()
         enableButtons(state = false)
+        if (currentIndex == questionBank.lastIndex) {
+            printScore()
+        }
     }
 
     private fun enableButtons(state: Boolean) {
@@ -78,6 +81,13 @@ class MainActivity : AppCompatActivity() {
             trueButton.isEnabled = state
             falseButton.isEnabled = state
         }
+    }
+
+    private fun printScore() {
+        val maxScore = questionBank.size
+        val finalScore = (score / maxScore.toFloat()) * 100
+        Toast.makeText(this, "Your score is ${finalScore.toInt()}%!", Toast.LENGTH_SHORT).show()
+        score = 0
     }
 
     override fun onStart() {
