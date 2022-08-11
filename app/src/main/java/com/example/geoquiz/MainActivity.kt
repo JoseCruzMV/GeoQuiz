@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateQuestion() {
         binding.questionTextView.setText(questionBank[currentIndex].textResId)
+        enableButtons(state = true)
     }
 
     private fun checkAnswer(userAnswer: Boolean) {
@@ -68,8 +69,15 @@ class MainActivity : AppCompatActivity() {
         } else {
             R.string.incorrect_toast
         }
-
         Toast.makeText(this, messageId, Toast.LENGTH_SHORT).show()
+        enableButtons(state = false)
+    }
+
+    private fun enableButtons(state: Boolean) {
+        binding.apply {
+            trueButton.isEnabled = state
+            falseButton.isEnabled = state
+        }
     }
 
     override fun onStart() {
