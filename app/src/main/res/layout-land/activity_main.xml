@@ -40,22 +40,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center|start|end"
+        android:gravity="end"
         android:padding="16dp"
         android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/previous_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/prev_button"
-            app:icon="@drawable/ic_arrow_left"
-            app:iconGravity="start" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
 
         <Button
             android:id="@+id/next_button"
